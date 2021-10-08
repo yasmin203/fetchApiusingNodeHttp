@@ -1,0 +1,19 @@
+body{
+    /* background-color: rgb(255, 255, 255); */
+    animation: move 0.8s ease;
+    -webkit-animation: move 10s ease infinite;
+}
+@keyframes move{
+    20%{
+        background-color: rosybrown;
+    }
+    50%{
+        background-color: rgb(236, 215, 91);
+    }
+    70%{
+        background-color: rgb(91, 180, 202);
+    }
+    100%{
+        background-color: rgb(196, 78, 49);
+    }
+}

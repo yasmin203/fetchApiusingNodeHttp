@@ -1,0 +1,19 @@
+{{>header}}
+<table class="container my-4 text-center  table table-striped">
+    <thead>
+        <th>userId</th>
+        <th>id</th>
+        <th>title</th>
+        <th>body</th>
+    </thead>
+    <tbody>
+        {{#each data}}
+        <tr>
+            <td class="p-3">{{this.quote_id}}</td>
+            <td>{{this.series}}</td>
+            <td>{{this.author}}</td>
+            <td>{{this.quote}}</td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
