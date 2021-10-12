@@ -1,0 +1,25 @@
+{{>header}}
+{{>navbar}}
+<section class="my-3 container">
+    <form method="post">
+         <div class="my-3">
+            <input class="form-control" placeholder="Task Title" name="taskTitle">
+        </div>
+
+ <select class="form-control mb-3" name="taskType" id="taskType">Select Task Type
+
+        <option value="-1">Select Task Type</option>
+           {{#each  allTaskTypes}}
+        <option value="{{this.taskType}}">{{this.taskType}}</option>
+        {{/each}}
+    </select>
+          <div class="my-3">
+            <input class="form-control" placeholder="Task Details " name="taskDetails">
+        </div> 
+       
+        <div class="mb-3">
+            <input type="submit" class="btn btn-primary" value="add task">
+        </div>
+    </form>
+</section>
+{{>footer}}
