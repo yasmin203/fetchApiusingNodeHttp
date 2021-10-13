@@ -58,7 +58,12 @@ class Task {
     db((err, dbCilent) => {
       if (err) res.send("database error");
       dbCilent.collection("task").findOne({ _id: id }, (err, task) => {
-        res.render("editTask", {task});
+        dbCilent
+          .collection("taskType")
+          .find()
+          .toArray((e, allTaskTypes) => {
+            res.render("editTask", { task, allTaskTypes });
+          });
       });
     });
   };
