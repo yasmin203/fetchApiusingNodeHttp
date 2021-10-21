@@ -1,0 +1,16 @@
+{
+  "name": "taskcustomerusingyargs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "CheckUsers.js",
+  "scripts": {
+    "dev": "node server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "uniqid": "^5.4.0",
+    "validator": "^13.6.0",
+    "yargs": "^17.2.1"
+  }
+}
