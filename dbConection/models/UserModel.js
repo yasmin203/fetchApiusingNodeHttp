@@ -41,10 +41,13 @@ const userSchema = new mongoose.Schema({
     type: String,
     trim: true,
   },
-  isAdmin:{type:Boolean},
-  address: { type: String, trim: true },
+  isAdmin: { type: Boolean, default: false },
+
   status: { type: Boolean, default: false },
-  tokens: [{ token: { type: String, required: true } }, { timestamps: true }],
+
+  tokens: [{ token: { type: String, required: true } },
+  { timestamps: true }
+  ],
 });
 
 userSchema.methods.toJSON = function () {
@@ -59,7 +62,7 @@ userSchema.pre("save", async function () {
   let user = this;
   if (user.isModified("password"))
     user.password = await bcrypt.hash(user.password, 12);
-  // user.updatedAt= Date.now()
+  user.updatedAt = Date.now()
 });
 userSchema.statics.loginUser = async (email, password) => {
   const user = await User.findOne({ email });
@@ -70,7 +73,7 @@ userSchema.statics.loginUser = async (email, password) => {
 };
 userSchema.methods.generateToken = async function () {
   const user = this;
-  const token = jwt.sign({ _id: user._id ,isAdmin:this.isAdmin}, process.env.JWTTOKEN);
+  const token = jwt.sign({ _id: user._id, isAdmin: this.isAdmin }, process.env.JWTTOKEN);
   // user.tokens.push({token})
   user.tokens = user.tokens.concat({ token });
   await user.save();

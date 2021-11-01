@@ -1,12 +1,12 @@
 const Project = require("../dbConection/models/ProjectsModel");
 
 class ProjectsController {
- 
+
 
   static addImg = async (req, res) => {
     try {
       if (!req.file) throw new Error("file not found");
-      req.project.image = req.file.path; //.replaceAll("\\", "/"); // \\  /
+      req.project.image = "assets/" + req.file.filename // \\  /
       await req.project.save();
       res.status(200).send({
         apiStatus: true,
@@ -21,11 +21,12 @@ class ProjectsController {
       });
     }
   };
- 
+
   // adding project
   static add = async (req, res) => {
     try {
       const addProject = new Project(req.body);
+      //res.send(addProject)
       await addProject.save();
       res.send({ addProject, message: "project added sucssfly" });
     } catch (error) {
@@ -36,20 +37,20 @@ class ProjectsController {
   static showone = async (req, res) => {
     try {
       const project = await Project.findOne(req.params._id);
-      if(!project) res.status(404).send("project not fount to show it ")
-      res.status(200).send({project, message: "your viewing single project now " });
+      if (!project) res.status(404).send("project not fount to show it ")
+      res.status(200).send({ project, message: "your viewing single project now " });
     } catch (error) {
-      res.status(500).send( error);
+      res.status(500).send(error);
     }
   };
   //show all projects
   static showAll = async (req, res) => {
     try {
       const project = await Project.find();
-      if(!project) res.status(404).send("no projects yet !! ")
-      res.status(200).send({project, message: "your viewing all projects now " });
+      if (!project) res.status(404).send("no projects yet !! ")
+      res.status(200).send({ project, message: "your viewing all projects now " });
     } catch (error) {
-      res.status(500).send( error);
+      res.status(500).send(error);
     }
   };
   //edit  project

@@ -1,15 +1,12 @@
 const multer = require('multer')
 const fs= require('fs')
 const path = require('path')
-// const upload = multer({
 
-// })
-// const upload = multer({ dest: 'uploads/' })
 const storage = multer.diskStorage({
     destination:function(req, file, cb){
         let loc
-        if(req.user) loc = path.join("uploads", req.user._id.toString()) 
-        else loc = path.join("uploads", "images") 
+        if (req.user) loc = path.join("src/assets", req.user._id.toString())
+        else loc = path.join("src/assets/uploads", "images")
         fs.mkdir(loc, (err)=>{})
         cb(null, loc)
     },
@@ -20,11 +17,12 @@ const storage = multer.diskStorage({
 })
 const upload = multer({
     storage,
-    limits:{fileSize:200000000},
+    limits: { fileSize: 500000000 },
     fileFilter: function(req, file, cb){
-        if(path.extname(file.originalname)!=".png") 
+        if (path.extname(file.originalname) != ".jpg" && path.extname(file.originalname) != ".png")
             return cb(new Error("invalid image"))
         cb(null, true)
     }
 })
+
 module.exports = upload

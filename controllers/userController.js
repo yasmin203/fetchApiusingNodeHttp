@@ -66,10 +66,15 @@ class UserController {
   //user profile
 
   static profile = async (req, res) => {
-    res
-      .status(200)
-      .send({ apiStatus: true, data: req.user, message: "user data loaded " });
-  };
+    res.status(200).send({
+      apiStatus: true,
+      data: req.user,
+      message: "user data loaded"
+    })
+  }
+
+
+  // user logout
   static logout = async (req, res) => {
     try {
       res.send({ apiStatus: true, data: req.user, message: "user loged out " });
@@ -81,7 +86,7 @@ class UserController {
   static addImg = async (req, res) => {
     try {
       if (!req.file) throw new Error("file not found");
-      req.user.image = req.file.path; //.replaceAll("\\", "/"); // \\  /
+      req.user.image = req.file.path.split("\\").join('/') // \\  /
       await req.user.save();
       res.status(200).send({
         apiStatus: true,
@@ -96,23 +101,7 @@ class UserController {
       });
     }
   };
-  static addImage = async (req, res) => {
-    try {
-      req.user.image = req.file.path;
-      await req.user.save();
-      res.status(200).send({
-        apiStatus: true,
-        data: req.user,
-        message: " image added successfuly",
-      });
-    } catch (e) {
-      res.status(500).send({
-        apiStatus: false,
-        data: e.message,
-        message: "error adding image",
-      });
-    }
-  };
+
 
   // adding user
   static addUser = async (req, res) => {
@@ -122,10 +111,10 @@ class UserController {
       console.log("dfsdfsfsrr")
       res.send(
         {
-     
-        data:req.body ,
-         message: "user added sucssfly"
-        
+
+          data: req.body,
+          message: "user added sucssfly"
+
         });
     } catch (error) {
       res.status(500).send({ error, message: "faild to add new user " });
@@ -179,7 +168,7 @@ class UserController {
 
   static approve = async (req, res) => {
     try {
-      
+
     } catch (error) {
       res.status(500).send(error);
     }
