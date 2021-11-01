@@ -1,0 +1,47 @@
+<section class="container ">
+    <h1 class="text-center py-3">Add new project </h1>
+
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <div *ngIf="errRegister!=''" class="alert alert-danger">{{errRegister}}</div>
+        <div class="row mb-3 col-6 mx-auto">
+            <input class="form-control" formControlName="name" placeholder="project name">
+            <div class="alert alert-danger my-3" *ngIf="name?.invalid && ( name?.dirty ||name?.touched)">
+                <p *ngIf="name?.errors?.required"> * name is required </p>
+            </div>
+        </div>
+
+        <div class=" row mb-3 col-6 mx-auto">
+            <textarea class="form-control" formControlName="details" rows="5" placeholder="details"></textarea>
+            <div class="alert alert-danger my-3">
+                <p *ngIf="details?.errors?.required"> * details is required </p>
+            </div>
+        </div>
+        <div class=" row mb-3 col-6 mx-auto">
+            <textarea class="form-control" formControlName="features" rows="5" placeholder="features"></textarea>
+            <div class="alert alert-danger my-3">
+                <p *ngIf="features?.errors?.required"> * features is required </p>
+            </div>
+        </div>
+        <div class="col-md-6 col-12 p-4">
+
+            <!-- <form #pimage="ngForm" (ngSubmit)="upimg()"> -->
+            <!-- <img src="{{img}}" class="rounded mx-auto d-block" alt="..."> -->
+            <!-- <input name="img" type="file" (change)="onChangeFile($event)"> -->
+            <button>upload image</button>
+        </div>
+        <div class="form-check row mb-3 col-6 mx-auto">
+            <input class="form-check-input" type="checkbox" value="" id="isSold" formControlName="isSold">
+            <label class="form-check-label" for="isSold">
+                is Sold
+            </label>
+            <div class="alert alert-danger my-3">
+                <p *ngIf="isSold?.errors?.required"> * isSold is required </p>
+            </div>
+        </div>
+        <p class="text-center">Complete the form to enable button.</p>
+        <div class="row mb-3 col-2 mx-auto">
+
+            <button class="btn btn-primary " type="submit" [disabled]="!registerForm.valid">Add Project</button>
+        </div>
+    </form>
+</section>

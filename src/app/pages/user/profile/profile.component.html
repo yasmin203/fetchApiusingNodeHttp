@@ -1,0 +1,23 @@
+<section class="container my-5">
+    <div class="row m-3 border border-primary rounded">
+        <div class="col-md-6 col-12 p-4">
+            <h5>user name : {{userData.name}}</h5>
+            <p> user email: {{userData.email}}</p>
+            <p> user phone: {{userData.phone}}</p>
+            <p> user id: {{userData._id}}</p>
+            <p> user regitered at: {{userData.createdAt|date}}</p>
+        </div>
+        <div class="col-md-6 col-12 p-4">
+            <div *ngIf="userData.image">
+                <!-- <img src="http://localhost:3000/findAsset/{{userData.image}}"> -->
+            </div>
+            <form #pimage="ngForm" (ngSubmit)="upimg()">
+                <img src="..." class="rounded mx-auto d-block" alt="...">
+                <input name="img" type="file" (change)="onChangeFile($event)">
+                <button>update image</button>
+            </form>
+        </div>
+
+    </div>
+
+</section>

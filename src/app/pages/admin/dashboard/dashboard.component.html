@@ -1,0 +1,22 @@
+<section>
+    <div class="container">
+        <div class="list-group">
+            <a (click)="toggleChild()" class="list-group-item list-group-item-action">Users</a>
+
+            <a routerLink="dispAllProjects"
+                class="list-group-item list-group-item-action list-group-item-primary">Projects</a>
+            <a routerLink="dispAllRequests"
+                class="list-group-item list-group-item-action list-group-item-secondary">Burshaseing
+                Requests</a>
+            <a routerLink="dispAllTest"
+                class="list-group-item list-group-item-action list-group-item-success">Testmonials</a>
+            <a routerLink="contact" class="list-group-item list-group-item-action list-group-item-danger">Contact us</a>
+            <a routerLink="logout" (click)="logout()"
+                class="list-group-item list-group-item-action list-group-item-warning">logout</a>
+
+        </div>
+        <div *ngIf="showMePartially2">
+            <app-all-users [showMePartially]="showVar"></app-all-users>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,47 @@
+<div class="containser" *ngIf="showMePartially">
+    <!-- <form class="my-5"> -->
+    <div class="form-row d-flex justify-content-start my-5">
+        <div class="col-sm-12 col-md-6 col-lg-6 ">
+            <input class="form-control " placeholder="Enter search value to filter " [(ngModel)]="searchKey"
+                (keyup)="filterData()">
+        </div>
+
+
+        <div class="col-sm-12 col-md-3 col-lg-4 ml-5">
+            <button class="btn btn-success " (click)="changeView()">Add New User</button>
+        </div>
+    </div>
+    <!-- </form> -->
+
+    <table class="table table-striped my-5 border border-1 text-center" *ngIf="x">
+        <thead>
+            <td class="p-2">#</td>
+            <td class="p-2">User ID</td>
+            <td class="p-2">Name</td>
+            <td class="p-2">Email</td>
+            <td class="p-2">phone</td>
+            <td class="p-2">isAdmin</td>
+            <td class="p-2">Registered At</td>
+            <td class="p-2">Action</td>
+        </thead>
+        <tbody>
+            <tr *ngFor=" let user of usersData ; index as i">
+
+                <td>{{i+1}}</td>
+                <td>{{user._id}}</td>
+                <td>{{user.name}}</td>
+                <td>{{user.email}}</td>
+                <td>{{user.phone}}</td>
+                <td>{{user.isAdmin}}</td>
+                <td>{{user.createdAt}}</td>
+
+                <td> <button class="btn btn-primary">Edit</button> </td>
+                <td> <button class="btn btn-danger">Delete</button> </td>
+
+            </tr>
+        </tbody>
+    </table>
+    <div *ngIf="!x">
+        <app-add-new-user></app-add-new-user>
+    </div>
+</div>
